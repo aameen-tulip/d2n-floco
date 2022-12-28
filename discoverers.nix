@@ -1,14 +1,16 @@
-{config, ...}: {
-  discoverers.dummy = rec {
-    name = "dummy";
+{ config, ... }: {
+  discoverers.dummy = let
+    name      = "dummy";
     subsystem = "hello";
-    discover = {tree}: [
-      (config.dlib.construct.discoveredProject {
+  in {
+    inherit name subsystem;
+    discover  = { tree }: [
+      ( config.dlib.construct.discoveredProject {
         inherit subsystem name;
         inherit (tree) relPath;
-        translators = ["dummy"];
+        translators   = ["dummy"];
         subsystemInfo = {};
-      })
+      } )
     ];
   };
 }
