@@ -1,26 +1,27 @@
-{ config, ... }: let
-  inherit (config.pkgs) hello;
-in {
-  translators.dummy = { ... }: {
+{ config, ... }: {
+  translators.floco = { ... }: {
     type      = "pure";
-    name      = "dummy";
-    subsystem = "hello";
+    name      = "floco";
+    subsystem = "node";
     translate = { ... }: {
       result = {
         _generic = {
-          subsystem               = "hello";
-          defaultPackage          = "hello";
+          subsystem               = "node";
+          defaultPackage          = "lodash";
           location                = "";
           sourcesAggregatedHash   = null;
-          packages.${hello.pname} = hello.version;
+          packages.lodash         = "4.17.21";
         };
-        _subsystem                                   = {};
-        cyclicDependencies                           = {};
-        dependencies.${hello.pname}.${hello.version} = [];
-        sources.${hello.pname}.${hello.version}      = {
-          type = "http";
-          url  = hello.src.url;
-          hash = hello.src.outputHash;
+        _subsystem                       = {};
+        cyclicDependencies               = {};
+        dependencies.lodash."4.17.21"    = [];
+        sources.lodash."4.17.21".outputs = {
+          fetched = narHash: builtins.fetchTree {
+            type = "tarball";
+            url  = "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz";
+            inherit narHash;
+          };
+          calcHash = _: "sha256-amyN064Yh6psvOfLgcpktd5dRNQStUYHHoIqiI6DMek=";
         };
       };
     };
