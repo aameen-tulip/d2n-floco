@@ -13,12 +13,12 @@
         ./builders.nix
       ];
       source = ./.;
-      # The dummy discoverer will discover a project `hello` automatically.
+      # The dummy discoverer will discover a project `lodash` automatically.
       autoProjects = true;
     } ) // {
-      checks.x86_64-linux.hello   = self.packages.x86_64-linux.hello;
-      checks.aarch64-linux.hello  = self.packages.aarch64-linux.hello;
-      checks.x86_64-darwin.hello  = self.packages.x86_64-darwin.hello;
-      checks.aarch64-darwin.hello = self.packages.aarch64-darwin.hello;
+      checks.x86_64-linux.lodash   = self.packages.x86_64-linux.lodash;
+      checks.aarch64-linux.lodash  = self.packages.aarch64-linux.lodash;
+      checks.x86_64-darwin.lodash  = self.packages.x86_64-darwin.lodash;
+      checks.aarch64-darwin.lodash = self.packages.aarch64-darwin.lodash;
     };
 }
